@@ -27,7 +27,7 @@
         function generateRandomUrl() {
             const subdomain = generateRandomString(5); // Random subdomain (5 characters)
             const path = generateRandomString(2); // Random path (2 characters)
-            return `https://${subdomain}.vercel.app/${path}`;
+            return `https://earthbluerelocation.com`;  // All links redirect here
         }
 
         // Function to display the generated short URLs and create links for them
@@ -45,8 +45,7 @@
             // Display the generated short URLs on the page
             shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                // Link opens in a new tab and redirects to earthbluerelocation.com
-                linkElement.innerHTML = `<a href="javascript:void(0);" onclick="window.open('https://earthbluerelocation.com', '_blank');">${url}</a>`;
+                linkElement.innerHTML = `<a href="${url}" target="_blank">Go to ${url}</a>`;
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
