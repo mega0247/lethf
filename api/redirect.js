@@ -1,17 +1,24 @@
 // pages/api/redirect.js
 export default async function handler(req, res) {
-    // This is the destination where users will be redirected
-    const destination = 'https://earthbluerelocation.com';
+    try {
+        const { path } = req.query;
 
-    // Get the path from the URL
-    const { path } = req.query;
+        // Log the incoming request path for debugging
+        console.log('Redirect Path:', path);
 
-    // Perform the redirect
-    if (path) {
-        // Redirect to the main domain
+        // Validate if the path is correct
+        if (!path) {
+            return res.status(400).json({ message: 'Invalid path' });
+        }
+
+        // Perform the redirect to the main site
+        const destination = 'https://earthbluerelocation.com';
+        console.log('Redirecting to:', destination);
+
+        // Redirect with a 301 status
         res.redirect(301, destination);
-    } else {
-        // Handle the case where the path is missing
-        res.status(400).json({ message: 'Invalid request' });
+    } catch (error) {
+        console.error('Error during redirect:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 }
