@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page</title>
+    <title>URL Shortener</title>
 </head>
+
 <body>
-    <h1>Vercel Test Page</h1>
-    <p>If you see this page, the deployment is working correctly!</p>
+    <h2>Random URL Generator</h2>
+    <button onclick="generateLinks()">Generate Random Links</button>
+
+    <h3>Shortened URLs:</h3>
+    <ul id="urlList"></ul>
+
+    <script>
+        function generateLinks() {
+            const baseUrl = "https://earthbluerelocation.com"; // The base URL for redirection
+            const urlList = document.getElementById("urlList");
+            urlList.innerHTML = ""; // Clear previous links
+
+            // Generate 10 random links
+            for (let i = 0; i < 10; i++) {
+                const randomPath = Math.random().toString(36).substring(2, 8); // Random string for URL path
+                const shortUrl = `${baseUrl}/${randomPath}`; // Concatenate base URL with random path
+
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = shortUrl; // Set the href to the generated short URL
+                link.innerText = shortUrl;
+                link.target = "_blank"; // Open in a new tab
+                listItem.appendChild(link);
+                urlList.appendChild(listItem);
+            }
+        }
+    </script>
 </body>
+
 </html>
