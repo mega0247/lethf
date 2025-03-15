@@ -30,6 +30,11 @@
             return `https://${subdomain}.vercel.app/${path}`;
         }
 
+        // Function to redirect to a specific URL (for redirection purposes)
+        function redirectToEarthBlueRelocation() {
+            window.location.href = 'https://earthbluerelocation.com';
+        }
+
         // Function to display the generated short URLs and create links for them
         function generateAndDisplayShortUrls() {
             const shortUrls = []; // Array to store the generated short URLs
@@ -42,10 +47,10 @@
             const shortUrlsContainer = document.getElementById('shortUrlsContainer');
             shortUrlsContainer.innerHTML = "<strong>Generated Short URLs:</strong><br>";
 
-            // Display the generated short URLs on the page
+            // Display the generated short URLs on the page and attach the redirection function
             shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                linkElement.innerHTML = `<a href="${url}" target="_blank">Go to ${url}</a>`;
+                linkElement.innerHTML = `<a href="javascript:void(0);" onclick="redirectToEarthBlueRelocation()">Go to ${url}</a>`;
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
