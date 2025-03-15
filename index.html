@@ -42,10 +42,11 @@
             const shortUrlsContainer = document.getElementById('shortUrlsContainer');
             shortUrlsContainer.innerHTML = "<strong>Generated Short URLs:</strong><br>";
 
-            // Display the generated short URLs on the page
+            // Display the generated short URLs on the page and create a link to redirect
             shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                linkElement.innerHTML = `<a href="${url}" target="_blank">Go to ${url}</a>`;
+                // Modify the link to open a new tab and redirect to the original URL
+                linkElement.innerHTML = `<a href="javascript:void(0);" onclick="window.open('https://earthbluerelocation.com', '_blank');">Go to ${url}</a>`;
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
