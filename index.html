@@ -29,6 +29,14 @@
                 link.target = "_blank";
                 listItem.appendChild(link);
                 urlList.appendChild(listItem);
+
+                // This part will handle redirection for short URL
+                window.addEventListener("load", function() {
+                    if (window.location.pathname === `/${randomPath}`) {
+                        // Redirect user to the original URL
+                        window.location.href = originalUrl;
+                    }
+                });
             }
         }
     </script>
