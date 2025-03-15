@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "redirect.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
-      "src": "/([a-zA-Z0-9]{2})", // This matches any 2-character short URL
-      "dest": "/api/redirect?shortUrl=$1"
+      "src": "/([a-zA-Z0-9]{2,})",
+      "dest": "/redirect.js?shortUrl=$1"
     }
   ]
 }
