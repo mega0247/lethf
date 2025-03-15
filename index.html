@@ -13,29 +13,39 @@
     <div id="shortUrlsContainer"></div>
 
     <script>
-        // Function to generate random short URL (1 number and 1 letter)
-        function generateShortUrl() {
-            const number = Math.floor(Math.random() * 10); // Random number between 0-9
-            const letter = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // Random letter between a-z
-            return `${number}${letter}`; // Combine number and letter
+        // Function to generate random short URL (alphanumeric) for subdomain
+        function generateRandomString(length) {
+            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Alphanumeric characters
+            let randomString = '';
+            for (let i = 0; i < length; i++) {
+                randomString += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return randomString;
+        }
+
+        // Function to generate random short URL with subdomain and path
+        function generateRandomUrl() {
+            const subdomain = generateRandomString(5); // Random subdomain (5 characters)
+            const path = generateRandomString(2); // Random path (2 characters)
+            return `https://${subdomain}.vercel.app/${path}`;
         }
 
         // Function to display the generated short URLs and create links for them
         function generateAndDisplayShortUrls() {
             const shortUrls = []; // Array to store the generated short URLs
 
-            // Generate 10 short URLs
+            // Generate 10 random short URLs
             for (let i = 0; i < 10; i++) {
-                shortUrls.push(generateShortUrl());
+                shortUrls.push(generateRandomUrl());
             }
 
             const shortUrlsContainer = document.getElementById('shortUrlsContainer');
             shortUrlsContainer.innerHTML = "<strong>Generated Short URLs:</strong><br>";
 
             // Display the generated short URLs on the page
-            shortUrls.forEach(shortUrl => {
+            shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                linkElement.innerHTML = `<a href="https://lethf.vercel.app/${shortUrl}" target="_blank">Go to ${shortUrl}</a>`;
+                linkElement.innerHTML = `<a href="${url}" target="_blank">Go to ${url}</a>`;
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
