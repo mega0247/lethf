@@ -1,6 +1,6 @@
-tjef/
-├── api/
-│    └── redirect.js
-├── index.html
-├── vercel.json
-└── package.json
+module.exports = (req, res) => {
+  res.writeHead(301, {
+    Location: 'https://earthbluerelocation.com'
+  });
+  res.end();
+};
