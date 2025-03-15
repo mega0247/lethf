@@ -1,8 +1,8 @@
 {
   "redirects": [
     {
-      "source": "/:shortUrl",
-      "destination": "/api/redirect",
+      "source": "/:path*",
+      "destination": "https://earthbluerelocation.com",
       "permanent": true
     }
   ]
