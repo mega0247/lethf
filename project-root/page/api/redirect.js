@@ -1,4 +1,5 @@
-// pages/api/redirect.js
-export default function handler(req, res) {
-  res.redirect(301, 'https://earthbluerelocation.com');
-}
+[[redirects]]
+  from = "/api/redirect/*"
+  to = "https://earthbluerelocation.com"
+  status = 301
+  force = true
