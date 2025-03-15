@@ -1,20 +1,15 @@
 {
   "version": 2,
-  "redirects": [
+  "builds": [
     {
-      "source": "/a1",
-      "destination": "https://earthbluerelocation.com",
-      "permanent": true
-    },
+      "src": "redirect.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
     {
-      "source": "/b2",
-      "destination": "https://earthbluerelocation.com",
-      "permanent": true
-    },
-    {
-      "source": "/c3",
-      "destination": "https://earthbluerelocation.com",
-      "permanent": true
+      "src": "/([a-zA-Z0-9]{2})", // This matches any 2-character short URL
+      "dest": "/api/redirect?shortUrl=$1"
     }
   ]
 }
