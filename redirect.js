@@ -1,10 +1,9 @@
 module.exports = (req, res) => {
   const { subdomain, path } = req.query;
 
-  // Example logic for redirection
+  // Here you can map short URL to your actual destination URL
   if (subdomain && path) {
-    // Here you can map the short URL to your original URL
-    // For instance, if path = '50', redirect to the desired URL
+    // Example: If '50' is passed, redirect to the specific URL
     if (path === '50') {
       res.redirect('https://earthbluerelocation.com');
     } else {
