@@ -26,7 +26,7 @@
         // Function to generate random short URL
         function generateRandomUrl() {
             const path = generateRandomString(2); // Random path (2 characters)
-            return `https://your-app.vercel.app/${path}`; // Replace with your Vercel URL
+            return `https://your-app.vercel.app/api/redirect?shortUrl=${path}`; // Using the API endpoint to redirect
         }
 
         // Function to display the generated short URLs and create links for them
