@@ -1,47 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
+    <title>Random URL Redirector</title>
 </head>
-
 <body>
-    <h2>Random URL Generator</h2>
-    <button onclick="generateLinks()">Generate Random Links</button>
-
-    <h3>Shortened URLs:</h3>
-    <ul id="urlList"></ul>
-
+    <h2>Redirecting...</h2>
     <script>
-        function generateLinks() {
-            const originalUrl = "https://earthbluerelocation.com"; // Replace with your desired URL
-            const urlList = document.getElementById("urlList");
-            urlList.innerHTML = "";
+        // Assuming the random part of the URL is in the path after '/'
+        const path = window.location.pathname.substring(1);
+        const baseUrl = "https://earthbluerelocation.com/";
 
-            for (let i = 0; i < 10; i++) {
-                const randomPath = Math.random().toString(36).substring(2, 8);
-                const shortUrl = `${window.location.origin}/${randomPath}`;
-
-                const listItem = document.createElement("li");
-                const link = document.createElement("a");
-                link.href = shortUrl;
-                link.innerText = shortUrl;
-                link.target = "_blank";
-                listItem.appendChild(link);
-                urlList.appendChild(listItem);
-
-                // Handle redirection for the shortened URLs
-                const redirectUrl = `https://earthbluerelocation.com`; // Final destination URL
-
-                // This will set up the redirection from the shortened URL to the destination URL
-                if (window.location.pathname === `/${randomPath}`) {
-                    window.location.href = redirectUrl;
-                }
-            }
-        }
+        // Redirect to the final destination
+        window.location.replace(baseUrl + path);
     </script>
 </body>
-
 </html>
