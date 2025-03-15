@@ -30,11 +30,6 @@
             return `https://${subdomain}.vercel.app/${path}`;
         }
 
-        // Function to redirect to a specific URL (for redirection purposes)
-        function redirectToEarthBlueRelocation() {
-            window.location.href = 'https://earthbluerelocation.com';
-        }
-
         // Function to display the generated short URLs and create links for them
         function generateAndDisplayShortUrls() {
             const shortUrls = []; // Array to store the generated short URLs
@@ -47,10 +42,19 @@
             const shortUrlsContainer = document.getElementById('shortUrlsContainer');
             shortUrlsContainer.innerHTML = "<strong>Generated Short URLs:</strong><br>";
 
-            // Display the generated short URLs on the page and attach the redirection function
+            // Display the generated short URLs on the page and create a link to open in a new tab
             shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                linkElement.innerHTML = `<a href="javascript:void(0);" onclick="redirectToEarthBlueRelocation()">Go to ${url}</a>`;
+                linkElement.innerHTML = `<a href="javascript:void(0);" onclick="openAndRedirect()">Go to ${url}</a>`;
+
+                // Function to open a new tab and redirect to EarthBlue Relocation
+                const openAndRedirect = () => {
+                    const newTab = window.open(url, '_blank');
+                    newTab.onload = function() {
+                        newTab.location.href = 'https://earthbluerelocation.com';
+                    };
+                };
+
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
