@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1>Short URL Generator</h1>
-    <p>Click below to generate a random short URL</p>
-    <button onclick="generateAndDisplayShortUrl()">Generate Short URL</button>
+    <p>Click below to generate 10 random short URLs</p>
+    <button onclick="generateAndDisplayShortUrls()">Generate Short URLs</button>
 
     <div id="shortUrlContainer"></div>
     <div id="redirectLinkContainer"></div>
@@ -21,17 +21,53 @@
             return `${number}${letter}`; // Combine number and letter
         }
 
-        // Function to display the generated short URL and create a link for it
-        function generateAndDisplayShortUrl() {
-            const shortUrl = generateShortUrl(); // Generate the short URL
+        // Function to generate and display 10 random short URLs
+        function generateAndDisplayShortUrls() {
+            const shortUrls = [];
             const shortUrlContainer = document.getElementById('shortUrlContainer');
             const redirectLinkContainer = document.getElementById('redirectLinkContainer');
+            
+            // Generate 10 random short URLs
+            for (let i = 0; i < 10; i++) {
+                shortUrls.push(generateShortUrl());
+            }
 
-            // Display the generated short URL on the page
-            shortUrlContainer.innerHTML = `<strong>Generated Short URL: </strong> https://lethf.vercel.app/${shortUrl}`;
+            // Display the generated short URLs on the page
+            shortUrlContainer.innerHTML = `<strong>Generated Short URLs: </strong><br>`;
+            shortUrls.forEach(shortUrl => {
+                shortUrlContainer.innerHTML += `<strong>/${shortUrl}</strong><br>`;
+            });
 
-            // Create a clickable link to simulate the redirect
-            redirectLinkContainer.innerHTML = `<a href="https://lethf.vercel.app/${shortUrl}" target="_blank" id="redirectLink">Go to ${shortUrl}</a>`;
+            // Create clickable links for each short URL
+            redirectLinkContainer.innerHTML = shortUrls.map(shortUrl => {
+                return `<a href="/${shortUrl}" id="redirectLink_${shortUrl}">Go to ${shortUrl}</a><br>`;
+            }).join('');
+
+            // Optionally, add a listener for clicks to handle redirects dynamically
+            shortUrls.forEach(shortUrl => {
+                document.getElementById(`redirectLink_${shortUrl}`).addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = generateFullUrl(shortUrl); // Redirect to the full URL
+                });
+            });
+        }
+
+        // This function simulates redirecting to the full URL after the short URL is generated
+        function generateFullUrl(shortUrl) {
+            const fullUrlMap = {
+                "0a": "https://example.com/page1",
+                "1b": "https://example.com/page2",
+                "3c": "https://google.com", // Sample redirection
+                "4d": "https://anotherexample.com" // Sample redirection
+            };
+
+            // If short URL exists in the map, redirect to it
+            if (fullUrlMap[shortUrl]) {
+                return fullUrlMap[shortUrl];
+            } else {
+                alert("No redirection found for this short URL.");
+                return "#"; // If not found, prevent redirection
+            }
         }
     </script>
 </body>
