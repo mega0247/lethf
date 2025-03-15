@@ -1,9 +1,15 @@
 {
-  "redirects": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/:path*",
-      "destination": "https://earthbluerelocation.com",
-      "permanent": true
+      "src": "pages/api/redirect.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/redirect",
+      "dest": "/api/redirect.js"
     }
   ]
 }
