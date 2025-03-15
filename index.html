@@ -3,17 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random URL Redirector</title>
+    <title>Random URL Generator</title>
 </head>
 <body>
-    <h2>Redirecting...</h2>
-    <script>
-        // Assuming the random part of the URL is in the path after '/'
-        const path = window.location.pathname.substring(1);
-        const baseUrl = "https://earthbluerelocation.com/";
+    <h2>Random URL Generator</h2>
+    <button onclick="generateLinks()">Generate Random Links</button>
 
-        // Redirect to the final destination
-        window.location.replace(baseUrl + path);
+    <h3>Generated Shortened URLs:</h3>
+    <ul id="urlList"></ul>
+
+    <script>
+        // Function to generate random links
+        function generateLinks() {
+            const baseUrl = "https://earthbluerelocation.com/"; // Base URL to append random paths
+            const urlList = document.getElementById("urlList");
+            urlList.innerHTML = ""; // Clear the list before adding new links
+
+            // Generate 10 random links
+            for (let i = 0; i < 10; i++) {
+                const randomPath = Math.random().toString(36).substring(2, 8); // Random string for path
+                const shortUrl = `${window.location.origin}/${randomPath}`; // Full URL with random path
+
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = shortUrl; // Set the link to the generated short URL
+                link.innerText = shortUrl; // Display the link as text
+                link.target = "_blank"; // Open in a new tab
+                listItem.appendChild(link);
+                urlList.appendChild(listItem);
+            }
+        }
+
+        // Check if the current URL has a random path (to redirect)
+        const path = window.location.pathname.substring(1); // Get path without leading '/'
+        if (path) {
+            const baseUrl = "https://earthbluerelocation.com/";
+            window.location.replace(baseUrl + path); // Redirect to the final URL
+        }
     </script>
 </body>
 </html>
