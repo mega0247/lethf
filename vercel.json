@@ -1,10 +1,9 @@
 {
-    "redirects": [
-      {
-        "source": "/:path*",
-        "destination": "https://earthbluerelocation.com",
-        "permanent": true
-      }
-    ]
-  }
-  
+  "redirects": [
+    {
+      "source": "/:shortUrl",
+      "destination": "https://earthbluerelocation.com/:shortUrl",
+      "permanent": true
+    }
+  ]
+}
