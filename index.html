@@ -10,8 +10,7 @@
     <p>Click below to generate 10 random short URLs</p>
     <button onclick="generateAndDisplayShortUrls()">Generate Short URLs</button>
 
-    <div id="shortUrlContainer"></div>
-    <div id="redirectLinkContainer"></div>
+    <div id="shortUrlsContainer"></div>
 
     <script>
         // Function to generate random short URL (1 number and 1 letter)
@@ -21,53 +20,24 @@
             return `${number}${letter}`; // Combine number and letter
         }
 
-        // Function to generate and display 10 random short URLs
+        // Function to display the generated short URLs and create links for them
         function generateAndDisplayShortUrls() {
-            const shortUrls = [];
-            const shortUrlContainer = document.getElementById('shortUrlContainer');
-            const redirectLinkContainer = document.getElementById('redirectLinkContainer');
-            
-            // Generate 10 random short URLs
+            const shortUrls = []; // Array to store the generated short URLs
+
+            // Generate 10 short URLs
             for (let i = 0; i < 10; i++) {
                 shortUrls.push(generateShortUrl());
             }
 
+            const shortUrlsContainer = document.getElementById('shortUrlsContainer');
+            shortUrlsContainer.innerHTML = "<strong>Generated Short URLs:</strong><br>";
+
             // Display the generated short URLs on the page
-            shortUrlContainer.innerHTML = `<strong>Generated Short URLs: </strong><br>`;
             shortUrls.forEach(shortUrl => {
-                shortUrlContainer.innerHTML += `<strong>/${shortUrl}</strong><br>`;
+                const linkElement = document.createElement('div');
+                linkElement.innerHTML = `<a href="/${shortUrl}" target="_blank">Go to ${shortUrl}</a>`;
+                shortUrlsContainer.appendChild(linkElement);
             });
-
-            // Create clickable links for each short URL
-            redirectLinkContainer.innerHTML = shortUrls.map(shortUrl => {
-                return `<a href="/${shortUrl}" id="redirectLink_${shortUrl}">Go to ${shortUrl}</a><br>`;
-            }).join('');
-
-            // Optionally, add a listener for clicks to handle redirects dynamically
-            shortUrls.forEach(shortUrl => {
-                document.getElementById(`redirectLink_${shortUrl}`).addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = generateFullUrl(shortUrl); // Redirect to the full URL
-                });
-            });
-        }
-
-        // This function simulates redirecting to the full URL after the short URL is generated
-        function generateFullUrl(shortUrl) {
-            const fullUrlMap = {
-                "0a": "https://example.com/page1",
-                "1b": "https://example.com/page2",
-                "3c": "https://google.com", // Sample redirection
-                "4d": "https://anotherexample.com" // Sample redirection
-            };
-
-            // If short URL exists in the map, redirect to it
-            if (fullUrlMap[shortUrl]) {
-                return fullUrlMap[shortUrl];
-            } else {
-                alert("No redirection found for this short URL.");
-                return "#"; // If not found, prevent redirection
-            }
         }
     </script>
 </body>
