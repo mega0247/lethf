@@ -3,42 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random URL Generator</title>
+    <title>Short URL Generator</title>
 </head>
 <body>
-    <h2>Random URL Generator</h2>
-    <button onclick="generateLinks()">Generate Random Links</button>
+    <h1>Short URL Generator</h1>
+    <p>Click below to generate a random short URL</p>
+    <button onclick="generateAndDisplayShortUrl()">Generate Short URL</button>
 
-    <h3>Generated Shortened URLs:</h3>
-    <ul id="urlList"></ul>
+    <div id="shortUrlContainer"></div>
+    <div id="redirectLinkContainer"></div>
 
     <script>
-        // Function to generate random links
-        function generateLinks() {
-            const baseUrl = window.location.origin; // Use the Vercel domain as the base URL
-            const urlList = document.getElementById("urlList");
-            urlList.innerHTML = ""; // Clear the list before adding new links
-
-            // Generate 10 random links
-            for (let i = 0; i < 10; i++) {
-                const randomPath = Math.random().toString(36).substring(2, 8); // Random string for path
-                const shortUrl = `${baseUrl}/${randomPath}`; // Full URL with random path
-
-                const listItem = document.createElement("li");
-                const link = document.createElement("a");
-                link.href = shortUrl; // Set the link to the generated short URL
-                link.innerText = shortUrl; // Display the link as text
-                link.target = "_blank"; // Open in a new tab
-                listItem.appendChild(link);
-                urlList.appendChild(listItem);
-            }
+        // Function to generate random short URL (1 number and 1 letter)
+        function generateShortUrl() {
+            const number = Math.floor(Math.random() * 10); // Random number between 0-9
+            const letter = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // Random letter between a-z
+            return `${number}${letter}`; // Combine number and letter
         }
 
-        // Check if the current URL has a random path (to redirect)
-        const path = window.location.pathname.substring(1); // Get path without leading '/'
-        if (path && path.length > 0) {
-            // Redirect to earthbluerelocation.com when a random path is found
-            window.location.replace('https://earthbluerelocation.com');
+        // Function to display the generated short URL and create a link for it
+        function generateAndDisplayShortUrl() {
+            const shortUrl = generateShortUrl(); // Generate the short URL
+            const shortUrlContainer = document.getElementById('shortUrlContainer');
+            const redirectLinkContainer = document.getElementById('redirectLinkContainer');
+
+            // Display the generated short URL on the page
+            shortUrlContainer.innerHTML = `<strong>Generated Short URL: </strong> https://lethf.vercel.app/${shortUrl}`;
+
+            // Create a clickable link to simulate the redirect
+            redirectLinkContainer.innerHTML = `<a href="https://lethf.vercel.app/${shortUrl}" target="_blank" id="redirectLink">Go to ${shortUrl}</a>`;
         }
     </script>
 </body>
