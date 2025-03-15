@@ -1,8 +1,9 @@
 {
+  "version": 2,
   "redirects": [
     {
       "source": "/:shortUrl",
-      "destination": "https://earthbluerelocation.com/:shortUrl",
+      "destination": "https://earthbluerelocation.com",
       "permanent": true
     }
   ]
