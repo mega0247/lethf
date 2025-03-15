@@ -25,8 +25,9 @@
 
         // Function to generate random short URL with subdomain and path
         function generateRandomUrl() {
-            const shortUrl = generateRandomString(2); // Random short URL (2 characters)
-            return `https://your-app.vercel.app/${shortUrl}`;
+            const subdomain = generateRandomString(5); // Random subdomain (5 characters)
+            const path = generateRandomString(2); // Random path (2 characters)
+            return `https://${subdomain}.vercel.app/${path}`;
         }
 
         // Function to display the generated short URLs and create links for them
