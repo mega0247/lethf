@@ -25,9 +25,9 @@
 
         // Function to generate random short URL with subdomain and path
         function generateRandomUrl() {
-            const subdomain = generateRandomString(5); // Random subdomain (5 characters)
-            const path = generateRandomString(2); // Random path (2 characters)
-            return `https://earthbluerelocation.com`;  // All links redirect here
+            const subdomain = generateRandomString(8); // Random subdomain (8 characters)
+            const path = generateRandomString(5); // Random path (5 characters)
+            return `https://${subdomain}.vercel.app/${path}`; // Generate random URL with Vercel subdomain
         }
 
         // Function to display the generated short URLs and create links for them
@@ -45,7 +45,7 @@
             // Display the generated short URLs on the page
             shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                linkElement.innerHTML = `<a href="${url}" target="_blank">Go to ${url}</a>`;
+                linkElement.innerHTML = `<a href="${url}" target="_blank" onclick="window.open('${url}', '_blank'); return false;">Go to ${url}</a>`;
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
