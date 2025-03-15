@@ -5,5 +5,11 @@
       "src": "pages/api/redirect.js",
       "use": "@vercel/node"
     }
+  ],
+  "routes": [
+    {
+      "src": "/api/redirect",
+      "dest": "/pages/api/redirect.js"
+    }
   ]
 }
