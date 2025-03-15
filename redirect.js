@@ -1,15 +1,19 @@
 module.exports = (req, res) => {
   const { subdomain, path } = req.query;
 
-  // Here you can map short URL to your actual destination URL
+  // If both subdomain and path are provided
   if (subdomain && path) {
-    // Example: If '50' is passed, redirect to the specific URL
-    if (path === '50') {
-      res.redirect('https://earthbluerelocation.com');
-    } else {
-      res.status(404).send('Not Found');
+    // Define the mapping for each short URL path to the real destination
+    if (path === 'TU') {
+      return res.redirect('https://earthbluerelocation.com');
     }
-  } else {
-    res.status(400).send('Bad Request');
+    // Add more path mappings as needed
+    else {
+      // If no specific path found, return a 404
+      return res.status(404).send('Not Found');
+    }
   }
+
+  // If no subdomain or path provided, return a 400 error
+  return res.status(400).send('Bad Request');
 };
