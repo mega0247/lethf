@@ -15,14 +15,14 @@
     <script>
         // Function to generate random links
         function generateLinks() {
-            const baseUrl = "https://earthbluerelocation.com/"; // Base URL to append random paths
+            const baseUrl = window.location.origin; // Use the Vercel domain as the base URL
             const urlList = document.getElementById("urlList");
             urlList.innerHTML = ""; // Clear the list before adding new links
 
             // Generate 10 random links
             for (let i = 0; i < 10; i++) {
                 const randomPath = Math.random().toString(36).substring(2, 8); // Random string for path
-                const shortUrl = `${window.location.origin}/${randomPath}`; // Full URL with random path
+                const shortUrl = `${baseUrl}/${randomPath}`; // Full URL with random path
 
                 const listItem = document.createElement("li");
                 const link = document.createElement("a");
@@ -36,9 +36,9 @@
 
         // Check if the current URL has a random path (to redirect)
         const path = window.location.pathname.substring(1); // Get path without leading '/'
-        if (path) {
-            const baseUrl = "https://earthbluerelocation.com/";
-            window.location.replace(baseUrl + path); // Redirect to the final URL
+        if (path && path.length > 0) {
+            // Redirect to earthbluerelocation.com when a random path is found
+            window.location.replace('https://earthbluerelocation.com');
         }
     </script>
 </body>
