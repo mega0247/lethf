@@ -13,7 +13,7 @@
     <div id="shortUrlsContainer"></div>
 
     <script>
-        // Function to generate random short URL (alphanumeric) for subdomain
+        // Function to generate random short URL (alphanumeric) for path
         function generateRandomString(length) {
             const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Alphanumeric characters
             let randomString = '';
@@ -25,9 +25,8 @@
 
         // Function to generate random short URL with subdomain and path
         function generateRandomUrl() {
-            const subdomain = generateRandomString(8); // Random subdomain (8 characters)
-            const path = generateRandomString(5); // Random path (5 characters)
-            return `https://${subdomain}.vercel.app/${path}`; // Generate random URL with Vercel subdomain
+            const randomPath = generateRandomString(8); // Random path (8 characters)
+            return `https://your-project-name.vercel.app/api/redirect?path=${randomPath}`; // Generate URL with dynamic API route
         }
 
         // Function to display the generated short URLs and create links for them
@@ -45,7 +44,7 @@
             // Display the generated short URLs on the page
             shortUrls.forEach(url => {
                 const linkElement = document.createElement('div');
-                linkElement.innerHTML = `<a href="${url}" target="_blank" onclick="window.open('${url}', '_blank'); return false;">Go to ${url}</a>`;
+                linkElement.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
                 shortUrlsContainer.appendChild(linkElement);
             });
         }
